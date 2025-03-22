@@ -1,95 +1,167 @@
+"use client";
+
 import Image from "next/image";
-import styles from "./page.module.css";
+import { useEffect, useState } from "react";
+
+import { File } from "../../types";
+import JokePopup from "./components/JokePopup";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [randomPortrait, setRandomPortrait] = useState<File>('');
+  const [randomNickname, setRandomNickname] = useState<string>('');
+  const [randomFont, setRandomFont] = useState<string>('');
+  const [loading, setLoading] = useState(true);
+  const [jokePopupVisible, setJokePopupVisible] = useState(false);
+  const [jokeKey, setJokeKey] = useState(0);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+
+
+  const randomizeNickname = () => {
+    const nicknames = [
+      'sammySeal',
+      'smokinSammySeal',
+      'originalSamSeal',
+      'samuelSealwall',
+      'samuelSealworth',
+      'samuelSealford',
+      'samuelSealington',
+      'sammySealkowski',
+      'sammySealowitz',
+      'sammySealberg',
+      'sammySealkani',
+      'sammySeal-Mart',
+    ];
+
+    let match = true;
+    let tries = 0;
+    let randomIndex;
+
+    while (match === true) {
+      tries++;
+      console.log('nickname tries', tries);
+      randomIndex = Math.floor(Math.random() * nicknames.length);
+
+      const currentNickname = sessionStorage.getItem('nickname');
+      const pick = nicknames[randomIndex];
+
+      if (pick != currentNickname) {
+        match = false;
+        sessionStorage.setItem('nickname', pick);
+        setRandomNickname(pick);
+      }
+    }
+  }
+
+  const randomizeFont = () => {
+    const fonts = [
+      "'Capriola', sans-serif",
+      "arial, sans-serif",
+      "'Carattere', sans-serif",
+      "'Caveat', sans-serif",
+      "'Gluten', sans-serif",
+      "'Lato', sans-serif",
+      "'Pacifico', sans-serif",
+      "'Courier-New', monospace",
+      "'Trebuchet', sans-serif",
+      "'Lucida Console', monospace"
+    ];
+
+    let match = true;
+    let tries = 0;
+    let randomIndex;
+    while (match === true) {
+      tries++;
+      console.log('font tries', tries);
+      randomIndex = Math.floor(Math.random() * fonts.length);
+
+      const currentFont = sessionStorage.getItem('font');
+      const pick = fonts[randomIndex];
+
+      if (pick != currentFont) {
+        match = false;
+        sessionStorage.setItem('font', pick);
+        setRandomFont(pick);
+      }
+    }
+  }
+
+  const randomizePortrait = () => {
+    const portraits = {
+      portrait1: 'sammy1-2.png',
+      portrait2: 'sammy2-2.png',
+      portrait3: 'sammy3-2.png',
+      portrait4: 'sammy4-2.png'
+    }
+    const portraitsArray = Object.values(portraits);
+
+    let match = true;
+    let tries = 0;
+    let randomIndex;
+    while (match === true) {
+      tries++;
+      console.log('portrait tries', tries);
+      randomIndex = Math.floor(Math.random() * portraitsArray.length);
+
+      const currentPortrait = sessionStorage.getItem('portrait');
+      const pick = portraitsArray[randomIndex];
+
+      if (pick != currentPortrait) {
+        match = false;
+        sessionStorage.setItem('portrait', pick);
+        setRandomPortrait(pick);
+      }
+    }
+  }
+
+  const randomizations = () => {
+    randomizeNickname();
+    randomizeFont();
+    randomizePortrait();
+  }
+
+
+  const tellJoke = () => {
+    if (jokePopupVisible) {
+      setJokeKey((prev) => prev + 1);
+      randomizations();
+    } else {
+      setJokePopupVisible(true);
+      setJokeKey((prev) => prev + 1);
+    }
+  }
+
+  const onPopupClose = () => {
+    setJokePopupVisible(false);
+    randomizations();
+  }
+
+  useEffect(() => {
+    randomizations();
+    setLoading(false);
+  }, []);
+
+  return (
+    <div>
+      {/* <!-- Splash Page --> */}
+      {!loading &&
+        <div className="splash">
+          <header>
+            <h1 id="nickname" style={{ fontFamily: randomFont }} className="title">{randomNickname}</h1>
+          </header>
+          <Image alt="randomized Sammy Seal portrait" id="sammy-portrait" src={`/${randomPortrait}`} width={450} height={400} />
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      }
+      <div className="splash-buttons">
+
+        {/* <!-- Joke Button --> */}
+        <div className="round-button main-btn" id="joke-btn" onClick={tellJoke}>
+          <span className="curved-text">Wanna hear a joke?</span>
+        </div>
+
+      </div>
+
+      {jokePopupVisible && <JokePopup onClose={onPopupClose} key={jokeKey} />}
+
     </div>
   );
 }
