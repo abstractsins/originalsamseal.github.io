@@ -185,7 +185,7 @@ div.square-button#game-btn {
   background-color: rgb(255, 248, 168);
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: space-between;
   padding: 30px;
   border-radius: 20px;
@@ -196,7 +196,7 @@ div.square-button#game-btn {
   height: 30vh;
   max-height: 550px;
   position: absolute;
-  right: 10%;
+  left: 30%;
   top: 25%;
   border: 3px solid rgb(12, 156, 156);
 }
@@ -279,5 +279,87 @@ footer.joke-footer {
 .popup-button#jokeQA-answer:active {
   transform: translate(5px, 5px);
   filter: unset;
+}
 
+div.credits {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+span.credits {
+  font-family: sans-serif;
+}
+
+
+@media screen and (max-width: 1200px){
+  body {
+    /* display: none; */
+  }
+
+  .popup.joke-popup {
+    left: 10%;
+  }
+  
+}
+
+@media screen and (max-width: 900px){
+
+  .popup.joke-popup {
+    left: 0;
+    width: 100%;
+    max-width: unset;
+  }
+
+  .toon-character {
+    display: flex;
+    width: 150px;
+  }
+
+  .joke-body .joke-setup {
+    font-size: 16pt;
+  }
+
+  .popup.joke-popup > div {
+    display: flex;
+    flex-direction: column;
+    width: fit-content !important;
+  }
+  
+}
+
+@media screen and (max-width: 800px){
+
+  .popup.joke-popup {
+    left: 10vw;
+    top: 25;
+    width: 80%;
+    height: 70vh !important;
+    max-height: unset;
+    max-width: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .popup.joke-popup > div {
+    display: flex;
+    flex-direction: column;
+    width: fit-content !important;
+  }
+  
+}
+
+@media screen and (max-width: 500px){
+
+  .popup.joke-popup {
+    left: 0vw;
+    top: 0;
+  }
+
+  
+}
+
+* {
+  /* border : 1px solid red; */
 }

@@ -32,6 +32,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+        <div className="credits">
+          <span className="credits">Original artwork by Matthew Hill</span>
+        </div>
       </body>
     </html>
   );

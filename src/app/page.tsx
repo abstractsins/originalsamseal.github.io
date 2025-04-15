@@ -33,12 +33,12 @@ export default function Home() {
     ];
 
     let match = true;
-    let tries = 0;
+    // let tries = 0;
     let randomIndex;
 
     while (match === true) {
-      tries++;
-      console.log('nickname tries', tries);
+      // tries++;
+      // console.log('nickname tries', tries);
       randomIndex = Math.floor(Math.random() * nicknames.length);
 
       const currentNickname = sessionStorage.getItem('nickname');
@@ -67,11 +67,11 @@ export default function Home() {
     ];
 
     let match = true;
-    let tries = 0;
+    // let tries = 0;
     let randomIndex;
     while (match === true) {
-      tries++;
-      console.log('font tries', tries);
+      // tries++;
+      // console.log('font tries', tries);
       randomIndex = Math.floor(Math.random() * fonts.length);
 
       const currentFont = sessionStorage.getItem('font');
@@ -95,11 +95,11 @@ export default function Home() {
     const portraitsArray = Object.values(portraits);
 
     let match = true;
-    let tries = 0;
+    // let tries = 0;
     let randomIndex;
     while (match === true) {
-      tries++;
-      console.log('portrait tries', tries);
+      // tries++;
+      // console.log('portrait tries', tries);
       randomIndex = Math.floor(Math.random() * portraitsArray.length);
 
       const currentPortrait = sessionStorage.getItem('portrait');
