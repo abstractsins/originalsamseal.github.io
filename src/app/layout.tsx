@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { useEffect } from "react";
 
 // font
 import { Geist, Geist_Mono } from "next/font/google";
@@ -23,11 +24,26 @@ export const metadata: Metadata = {
   },
 };
 
+const imageUrls = [
+  "/reeese.png",
+  "/bandit.png",
+  "/sammy.png",
+  "/mothman.png"
+];
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  useEffect(() => {
+    imageUrls.forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+  }, []);
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
@@ -39,3 +55,4 @@ export default function RootLayout({
     </html>
   );
 }
+
