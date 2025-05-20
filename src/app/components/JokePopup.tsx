@@ -51,7 +51,7 @@ export default function JokePopup({ onClose }: Props) {
 
     return (
         <div className="popup joke-popup">
-            <div>
+            <div className="joke-container">
                 <header className="joke-header">
                     <span className="joke-number">Joke no. {jokeNumber}</span>
                 </header>
@@ -60,7 +60,7 @@ export default function JokePopup({ onClose }: Props) {
                     <p className={`joke-punchline ${answerVisible ? 'visible' : ''}`}>{joke?.punchline}</p>
                 </div>
                 <footer className="joke-footer">
-                    <button className="popup-button" id="jokeQA-answer" onClick={answer}>Answer</button>
+                    <button className={`popup-button ${answerVisible ? 'disabled' : ''}`} id="jokeQA-answer" disabled={answerVisible} onClick={answer}>Answer</button>
                     <div className="close-button" onClick={onClose}><RiCloseFill /></div>
                 </footer>
             </div>
