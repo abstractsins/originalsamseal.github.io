@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { useEffect } from "react";
+import ImagePreloader from "./components/ImagePreloader";
+
 
 // font
 import { Geist, Geist_Mono } from "next/font/google";
@@ -24,12 +25,6 @@ export const metadata: Metadata = {
   },
 };
 
-const imageUrls = [
-  "/reeese.png",
-  "/bandit.png",
-  "/sammy.png",
-  "/mothman.png"
-];
 
 export default function RootLayout({
   children,
@@ -37,16 +32,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  useEffect(() => {
-    imageUrls.forEach((url) => {
-      const img = new Image();
-      img.src = url;
-    });
-  }, []);
-
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <ImagePreloader />
         {children}
         <div className="credits">
           <span className="credits">Original artwork by Matthew Hill</span>
